@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>User Registration & Login</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      background: #f3f4f6;
+    }
+    .container {
+      max-width: 400px;
+      background: white;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    h2 { text-align: center; }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+    button {
+      width: 100%;
+      padding: 10px;
+      background: #007bff;
+      border: none;
+      color: white;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    button:hover { background: #0056b3; }
+    .message { margin-top: 10px; text-align: center; color: green; }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <h2>Register</h2>
+  <input type="text" id="regName" placeholder="Full Name" />
+  <input type="text" id="regEmail" placeholder="Email" />
+  <input type="text" id="regUsername" placeholder="Username" />
+  <input type="text" id="regContact" placeholder="Contact" />
+  <input type="password" id="regPassword" placeholder="Password" />
+  <button onclick="registerUser()">Register</button>
+  <div id="regMessage" class="message"></div>
+
+  <hr>
+
+  <h2>Login</h2>
+  <input type="text" id="loginUsername" placeholder="Username" />
+  <input type="password" id="loginPassword" placeholder="Password" />
+  <button onclick="loginUser()">Login</button>
+  <div id="loginMessage" class="message"></div>
+</div>
+
+<script>
+const API_BASE = "http://localhost:8080/api";
+
+async function registerUser() {
+  const data = {
+    name: document.getElementBy
