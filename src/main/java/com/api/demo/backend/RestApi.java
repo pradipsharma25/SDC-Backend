@@ -31,6 +31,11 @@ public class RestApi {
         return tRepo.findAll();
     }
 
+    
+    @GetMapping("/hello")
+    public String test() {
+    	return "Hello world";
+    }
 //    @PostMapping("/login")
 //    public ResponseEntity<?> login(@RequestBody LoginRequest request) {
 //        try {
@@ -55,7 +60,7 @@ public class RestApi {
 //
 //        return ResponseEntity.ok("User registered successfully!");
 //    }
-    @GetMapping("/api/register")
+    @GetMapping("/register")
     public String getRegister() {
     	return "register";
     }
