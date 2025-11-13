@@ -50,17 +50,26 @@ public class UserController {
             String loginId = (request.getUsername() != null && !request.getUsername().isEmpty())
                     ? request.getUsername()
                     : request.getEmail();
-
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginId, request.getPassword())
             );
+            
+            
+            // To fetch the role of the user
+            Test user = request.getUsername() != null && !request.getUsername().isEmpty()
+                    ? tRepo.findByUsername(request.getUsername()).orElse(null)
+                    : tRepo.findByEmail(request.getEmail()).orElse(null);
+            
+            if (user == null) {
+                return ResponseEntity.status(404).body("User not found");
+            }
 
             // ✅ Generate JWT if login successful
             String token = jwtUtil.generateToken(loginId);
 
             return ResponseEntity.ok(Map.of(
                     "message", "Login successful",
-                    "token", token
+                    "token", token, "role",user.getRole()!=null ? user.getRole() : "test"
             ));
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).body("Invalid username/email or password");
