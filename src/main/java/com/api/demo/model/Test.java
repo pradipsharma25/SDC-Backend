@@ -16,6 +16,7 @@ public class Test {
 	private String username;
 	private String contact;
 	private String password;
+	private String role;
 	
 	
 	public String getPassword() {
@@ -53,6 +54,12 @@ public class Test {
 	}
 	public void setContact(String contact) {
 		this.contact = contact;
+	}
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
 	}
 	
 	
