@@ -1,7 +1,9 @@
 package com.api.demo.backend;
 
 import com.api.demo.config.JwtUtil;
+import com.api.demo.model.Event;
 import com.api.demo.model.Test;
+import com.api.demo.repository.EventRepository;
 import com.api.demo.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -11,6 +13,7 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -26,6 +29,9 @@ public class UserController {
 
     @Autowired
     private TestRepository tRepo;
+    
+    @Autowired
+    private EventRepository rRepo;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -74,6 +80,19 @@ public class UserController {
         } catch (AuthenticationException e) {
             return ResponseEntity.status(401).body("Invalid username/email or password");
         }
+    }
+    
+    
+    
+    @PostMapping("/event")
+    public ResponseEntity<String> createEvent(@RequestBody Event event) {
+        rRepo.save(event);
+        return ResponseEntity.ok("Entered successfully");
+    }
+    
+    @GetMapping("/event")
+    public List<Event> getEvent() {
+    	return rRepo.findAll();
     }
 
     // Example of a protected API endpoint
