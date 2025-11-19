@@ -3,7 +3,9 @@ package com.api.demo.backend;
 import com.api.demo.config.JwtUtil;
 import com.api.demo.model.Event;
 import com.api.demo.model.Test;
+import com.api.demo.model.Merch;
 import com.api.demo.repository.EventRepository;
+import com.api.demo.repository.MerchRepository;
 import com.api.demo.repository.TestRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,6 +34,9 @@ public class UserController {
     
     @Autowired
     private EventRepository rRepo;
+    
+    @Autowired
+    private MerchRepository mRepo;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -93,6 +98,17 @@ public class UserController {
     @GetMapping("/event")
     public List<Event> getEvent() {
     	return rRepo.findAll();
+    }
+    
+    @GetMapping("/merch")
+    public List<Merch> getMerch() {
+    	return mRepo.findAll();
+    }
+    
+    @PostMapping("/merch")
+    public ResponseEntity<String> createEvent(@RequestBody Merch merch) {
+        mRepo.save(merch);
+        return ResponseEntity.ok("Entered successfully");
     }
 
     // Example of a protected API endpoint

@@ -41,7 +41,7 @@ public class SecurityConfig {
                 .cors() // ✅ Enable CORS globally
                 .and()
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/api/login", "/api/register", "/api/test", "/register", "/register.html","/api/event").permitAll()
+                        .requestMatchers("/api/login", "/api/register", "/api/test", "/register", "/register.html","/api/event","/api/merch").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
