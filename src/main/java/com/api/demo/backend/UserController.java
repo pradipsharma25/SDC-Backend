@@ -54,7 +54,13 @@ public class UserController {
         tRepo.save(user);
         return ResponseEntity.ok("User registered successfully!");
     }
-
+    
+    @GetMapping("/pradip")
+    public String getPradip() {
+    
+    	return "Hello I am pradip Sharma";
+    }
+    
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest request) {
         try {
