@@ -1,12 +1,17 @@
 package com.api.demo.backend;
 
 import com.api.demo.config.JwtUtil;
+import com.api.demo.model.Artist;
 import com.api.demo.model.Event;
 import com.api.demo.model.Test;
+import com.api.demo.model.Ticketbooking;
 import com.api.demo.model.Merch;
+import com.api.demo.repository.ArtistRepository;
 import com.api.demo.repository.EventRepository;
 import com.api.demo.repository.MerchRepository;
 import com.api.demo.repository.TestRepository;
+import com.api.demo.repository.TicketRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.*;
@@ -37,6 +42,12 @@ public class UserController {
     
     @Autowired
     private MerchRepository mRepo;
+    
+    @Autowired
+    private TicketRepository tikRepo;
+    
+    @Autowired
+    private ArtistRepository artistRepo;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -126,5 +137,30 @@ public class UserController {
             return ResponseEntity.ok("Welcome, " + username + "!");
         }
         return ResponseEntity.status(401).body("Invalid or expired token");
+    }
+    
+    @PostMapping("/ticketbooking")
+    public ResponseEntity<String> createTicket(@RequestBody Ticketbooking ticket) {
+        tikRepo.save(ticket);
+        return ResponseEntity.ok("Entered successfully");
+    }
+    
+    @GetMapping("/ticketbooking")
+    public List<Ticketbooking> getTicket() {
+    	
+    	return tikRepo.findAll();
+    }
+    
+    
+    @PostMapping("/artist")
+    public ResponseEntity<String> postArtist(@RequestBody Artist artist) {
+        artistRepo.save(artist);
+        return ResponseEntity.ok("Entered successfully");
+    }
+    
+    @GetMapping("/artist")
+    public List<Artist> getartist() {
+    	
+    	return artistRepo.findAll();
     }
 }
