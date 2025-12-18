@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login", "/api/register", "/api/test", "/register", "/register.html","/api/event","/api/merch","/api/pradip",
-                        		"/api/ticketbooking","/api/artist").permitAll()
+                        		"/api/ticketbooking","/api/artist","/api/music").permitAll()
                         .anyRequest().authenticated()
                 )
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);

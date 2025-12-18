@@ -6,9 +6,11 @@ import com.api.demo.model.Event;
 import com.api.demo.model.Test;
 import com.api.demo.model.Ticketbooking;
 import com.api.demo.model.Merch;
+import com.api.demo.model.Music;
 import com.api.demo.repository.ArtistRepository;
 import com.api.demo.repository.EventRepository;
 import com.api.demo.repository.MerchRepository;
+import com.api.demo.repository.MusicRepository;
 import com.api.demo.repository.TestRepository;
 import com.api.demo.repository.TicketRepository;
 
@@ -48,6 +50,9 @@ public class UserController {
     
     @Autowired
     private ArtistRepository artistRepo;
+    
+    @Autowired
+    private MusicRepository musicRepo;
 
     @Autowired
     private JwtUtil jwtUtil;
@@ -162,5 +167,17 @@ public class UserController {
     public List<Artist> getartist() {
     	
     	return artistRepo.findAll();
+    }
+    
+    @PostMapping("/music")
+    public ResponseEntity<String> postMusic(@RequestBody Music music) {
+        musicRepo.save(music);
+        return ResponseEntity.ok("Entered successfully");
+    }
+    
+    @GetMapping("/music")
+    public List<Music> getMusic() {
+    	
+    	return musicRepo.findAll();
     }
 }
