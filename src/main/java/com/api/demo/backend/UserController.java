@@ -21,6 +21,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 import java.util.Map;
@@ -169,11 +170,19 @@ public class UserController {
     	return artistRepo.findAll();
     }
     
-    @PostMapping("/music")
-    public ResponseEntity<String> postMusic(@RequestBody Music music) {
-        musicRepo.save(music);
+    @PostMapping(value = "/music", consumes = "multipart/form-data")
+    public ResponseEntity<String> postMusic(
+            @RequestParam String title,
+            @RequestParam String artistName,
+            @RequestParam String album,
+            @RequestParam String genre,
+            @RequestParam MultipartFile audioFile,
+            @RequestParam MultipartFile imageFile
+    ) {
+        // save files + entity
         return ResponseEntity.ok("Entered successfully");
     }
+
     
     @GetMapping("/music")
     public List<Music> getMusic() {
