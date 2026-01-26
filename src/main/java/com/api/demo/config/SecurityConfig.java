@@ -42,7 +42,7 @@ public class SecurityConfig {
                 .and()
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers("/api/login", "/api/register", "/api/test", "/register", "/register.html","/api/event","/api/merch","/api/pradip",
-                        		"/api/ticketbooking","/api/artist","/api/music","/swagger-ui/index.html","/swagger-ui.html","/v3/api-docs","/swagger-ui/**",
+                        		"/api/ticketbooking","/api/artist","/api/music","/api/music/**","/swagger-ui/index.html","/swagger-ui.html","/v3/api-docs","/swagger-ui/**",
                         	    "/v3/api-docs/**",
                         	    "/swagger-ui.html"
                         				+ "").permitAll()
